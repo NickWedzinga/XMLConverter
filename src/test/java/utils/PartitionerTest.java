@@ -16,10 +16,7 @@ class PartitionerTest {
     @Test
     @DisplayName("Partitioner should be able to parse and split input file per person")
     void partitionInputFile() throws IOException {
-        var url = this.getClass().getResource("../input/partition-data.txt");
-        assert url != null;
-
-        var file = new File(url.getPath());
+        var file = new File("src/test/resources/input/partition-data.txt");
         var partitioner = new Partitioner();
 
         List<List<String>> actualData = partitioner.partitionInputData(file);

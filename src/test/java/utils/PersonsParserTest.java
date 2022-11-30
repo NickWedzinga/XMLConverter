@@ -11,24 +11,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PersonsParserTest {
 
     @Test
     @DisplayName("Input file should be converted to an expected Person list")
     void convertInputFiles() throws IOException {
-        var url = this.getClass().getResource("../input/example.txt");
-        assert url != null;
-
-        var file = new File(url.getPath());
         var parser = new PersonsParser();
 
-        var actualPersons = parser.parse(file);
+        var actualPersons = parser.parse("src/test/resources/input/example.txt");
         var expectedPersons = testPersons();
 
         assertThat(actualPersons)
                 .usingRecursiveComparison()
                 .isEqualTo(expectedPersons);
+    }
+
+    @Test
+    @DisplayName("PersonParser should fail if the input file specified does not exist")
+    void failIfInputFileMissing() throws IOException {
+        var parser = new PersonsParser();
+
+        Exception e = assertThrows(
+                IOException.class,
+                () ->parser.parse("src/test/resources/input/missing-file.txt"));
+
+        assertTrue(e.getMessage().startsWith("Expected input file with name"));
+
     }
 
     private People testPersons() {
