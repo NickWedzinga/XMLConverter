@@ -15,6 +15,13 @@ The project naturally has a dependency on Java, specifically Java version 11+. T
 The input line-based file can be found at "XMLConverter/src/main/resources/input/input-data.txt".  
 The output XML file will be created at "XMLConverter/src/main/resources/output/input-data_converted.xml".
 
+Between run iterations make sure to change which input file is used, manually delete the newly created output file or rename the input file.
+To avoid the risk of overwriting data, or the risk of continuously converting a file that has already been converted, the application won't overwrite a file if a file with the same name already exists.
+
+### With Java
+Simply run the XMLConverter.jar file located at the root of the directory like: 
+```java -jar XMLConverter.jar```
+
 ### With Maven
 To run the application with Maven make sure Maven is installed and added to PATH, then run:
 ```mvn exec:java``` while in the project root (next to the .pom.xml file). 

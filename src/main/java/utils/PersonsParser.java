@@ -12,7 +12,13 @@ public class PersonsParser {
 
     private final Partitioner partitioner = new Partitioner();
 
-    public People parse(File file) throws IOException {
+    public People parse(String inputDirectory) throws IOException {
+        var file = new File(inputDirectory);
+
+        if (!file.exists()) {
+            throw new IOException(String.format("Expected input file with name: [%s] was not found", inputDirectory));
+        }
+
         List<Person> persons = new ArrayList<>();
         List<List<String>> data = partitioner.partitionInputData(file);
 

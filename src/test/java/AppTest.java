@@ -15,14 +15,9 @@ class AppTest {
     @Test
     @DisplayName("Input file should be read, transformed and exported to XML")
     void convertExpectedXML() throws IOException {
-        // import file
-        var url = this.getClass().getResource("input/example.txt");
-        assert url != null;
-        var inputFile = new File(url.getPath());
-
-        // transform
+        // import and transform
         var parser = new PersonsParser();
-        var people = parser.parse(inputFile);
+        var people = parser.parse("src/test/resources/input/example.txt");
 
         // export xml
         var outputFile = "src/test/resources/output/example_converted.xml";
